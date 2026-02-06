@@ -38,6 +38,6 @@ phones.forEach(phone =>{
 
 // heandle search button
 const handleSearch = () =>{
-    console.log('Search handle')
+    console.log('handle search')
 }
 loadphone()
