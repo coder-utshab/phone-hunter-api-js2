@@ -17,7 +17,7 @@ phones.forEach(phone =>{
 
     //2. create a div
     const phoneCard = document.createElement('div');
-    phoneCard.classList = `card w-96 bg-gray-100 shadow-xl`;
+    phoneCard.classList = `card bg-gray-100 p-4 shadow-xl`;
     //3. set inner html
     phoneCard.innerHTML = `
     <figure><img src="${phone.image}"
@@ -34,5 +34,10 @@ phones.forEach(phone =>{
     phoneContainer.appendChild(phoneCard);
 })
 
+}
+
+// heandle search button
+const handleSearch = () =>{
+    console.log('Search handle')
 }
 loadphone()
