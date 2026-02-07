@@ -1,14 +1,14 @@
-const loadphone = async (searchText) =>{
+const loadphone = async (searchText, isShowAll) =>{
     const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
     const data = await res.json();
     const phones = data.data;
     // console.log(phones);
-    displayPhones(phones);
+    displayPhones(phones, isShowAll);
 }
 
 
-const displayPhones = phones =>{
-//1. console.log(phones);
+const displayPhones = (phones, isShowAll) =>{
+console.log(phones);
 
 const phoneContainer = document.getElementById('phone-container');
 //clear phone container cards before adding new cards
@@ -16,16 +16,18 @@ phoneContainer.textContent = '';
 
 //display show all button if there are morfe than 12 phones
 const showAllContainer = document.getElementById('show-all-container')
-if(phones.length > 12){
-  showAllContainer.classList.remove('hidden')
+if(phones.length > 12 && !isShowAll){
+  showAllContainer.classList.remove('hidden');
 }
 else{
   showAllContainer.classList.add('hidden')
 }
 
-
-//display only first 12 phones
-phones = phones.slice(0,12);
+console.log('is show all', isShowAll)
+//display only first 12 phones if not show all
+if(!isShowAll){
+  phones = phones.slice(0,12);
+}
 
 phones.forEach(phone =>{
     console.log(phone);
@@ -41,7 +43,7 @@ phones.forEach(phone =>{
     <h2 class="card-title">${phone.phone_name}</h2>
     <p>If a dog chews shoes whose shoes does he choose?</p>
     <div class="card-actions justify-end">
-      <button class="btn btn-primary">Buy Now</button>
+      <button onclick="handleShowDetail('${phone.slug}')" class="btn btn-primary">Show Details</button>
     </div>
   </div>
     `;
@@ -52,23 +54,26 @@ phones.forEach(phone =>{
 
 //hide loading spinner
 toggleLoadingSpinner(false);
+}
 
+const handleShowDetail = (id) =>{
+  console.log('clicked show details', id)
 }
 
 // heandle search button
-const handleSearch = () =>{
+const handleSearch = (isShowAll) =>{
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     console.log(searchText);
-    loadphone(searchText)
+    loadphone(searchText, isShowAll);
 }
 // handle search recup
-const handleSearch2 = () =>{
-  toggleLoadingSpinner(true);
-    const searchField = document.getElementById('search-field-2') ;
-    const searchText = searchField.value;
-    loadphone(searchText);
-}
+// const handleSearch2 = () =>{
+//   toggleLoadingSpinner(true);
+//     const searchField = document.getElementById('search-field-2') ;
+//     const searchText = searchField.value;
+//     loadphone(searchText);
+// }
 
 const toggleLoadingSpinner =(isLoading) =>{
   const loadingSpinner = document.getElementById('loading-spinner');
@@ -79,4 +84,11 @@ const toggleLoadingSpinner =(isLoading) =>{
     loadingSpinner.classList.add('hidden');
   }
 }
+
+
+// handle show all
+const handleShowAll = () =>{
+  handleSearch(true);
+}
+
 // loadphone();
