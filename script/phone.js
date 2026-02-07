@@ -83,7 +83,7 @@ const showDetailContainer = document.getElementById
 showDetailContainer.innerHTML = `
 <img src="${phone.image}" alt=""/>
 <p><span>Storage:</span>${phone?.mainFeatures.storage}</p>
-
+<p><span>GPS:</span>${phone?.others?.GPS}</p>
 `
 
 
