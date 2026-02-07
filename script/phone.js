@@ -14,6 +14,19 @@ const phoneContainer = document.getElementById('phone-container');
 //clear phone container cards before adding new cards
 phoneContainer.textContent = '';
 
+//display show all button if there are morfe than 12 phones
+const showAllContainer = document.getElementById('show-all-container')
+if(phones.length > 12){
+  showAllContainer.classList.remove('hidden')
+}
+else{
+  showAllContainer.classList.add('hidden')
+}
+
+
+//display only first 12 phones
+phones = phones.slice(0,12);
+
 phones.forEach(phone =>{
     console.log(phone);
 
@@ -44,5 +57,11 @@ const handleSearch = () =>{
     const searchText = searchField.value;
     console.log(searchText);
     loadphone(searchText)
+}
+
+const handleSearch2 = () =>{
+    const searchField = document.getElementById('search-field-2') 
+    const searchText = searchField.value;
+    loadphone(searchText);
 }
 // loadphone();
